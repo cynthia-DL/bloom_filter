@@ -8,7 +8,8 @@
 #include <time.h>
 
 typedef struct _bitarray {
-/* TODO */
+    int *tab_bit;
+    int taille;
 } bitarray;
 
 /* Return a pointer to an empty bitarray that can store m bits */
