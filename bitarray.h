@@ -1,15 +1,17 @@
 #ifndef PROJET_BLOOM_BITARRAY_H
 #define PROJET_BLOOM_BITARRAY_H
 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <assert.h>
-#include <time.h>
+    #include <stdio.h>
+    #include <string.h>
+    #include <stdlib.h>
+    #include <assert.h>
+    #include <time.h>
+    #include <math.h>
 
 typedef struct _bitarray {
     int *tab_bit;
-    int taille;
+    int taille_tab;
+    int nb_bit;
 } bitarray;
 
 /* Return a pointer to an empty bitarray that can store m bits */
@@ -29,4 +31,7 @@ int get_bitarray(bitarray* a, int pos);
 
 /* Set all positions in the bitarray to 0 */
 void clear_bitarray(bitarray *a);
+
+void print_bitarray(bitarray *a);
+
 #endif

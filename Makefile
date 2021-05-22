@@ -1,6 +1,6 @@
 CC=gcc
-CFLAGS=-Wall -ansi
-LDFLAGS=
+CFLAGS=-Wall -ansi -pedantic
+LDFLAGS= -lm
 DEPS=filter.h bitarray.h
 OBJ=filter.o bitarray.o
 
