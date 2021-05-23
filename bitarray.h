@@ -32,6 +32,7 @@ int get_bitarray(bitarray* a, int pos);
 /* Set all positions in the bitarray to 0 */
 void clear_bitarray(bitarray *a);
 
+/* Print the bitarray bit by bit */
 void print_bitarray(bitarray *a);
 
 #endif
