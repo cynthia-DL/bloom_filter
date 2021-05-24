@@ -4,7 +4,9 @@
 #include "bitarray.h"
 
 typedef struct _filter {
-/* TODO */
+    bitarray *bitarray;
+    int *weight;
+    int weight_height;
 } filter;
 
 /* Return a pointer to an empty filter with parameters m and k */
