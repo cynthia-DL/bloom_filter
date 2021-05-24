@@ -53,7 +53,7 @@ void print_bitarray(bitarray *a) {
  * Get the value at position pos in the bitarray
  * @param bittaray a
  * @param int pos
- * @return 0 or 1 depending of the value of the byte 
+ * @return 0 or 1 depending of the value of the byte pos
  */
 int get_bitarray(bitarray* a, int pos){
     int which_array, index, res;
@@ -71,4 +71,23 @@ int get_bitarray(bitarray* a, int pos){
     res =  (a->tab_bit[which_array] & (1 << index)) ? 1 : 0;
 
     return res;
+}
+
+/** Set position pos in the bitarray to 0 
+ * @param bittaray a
+ * @param int pos
+ */
+void reset_bitarray(bitarray *a, int pos){
+    int which_array, index;
+
+    assert(a != NULL);
+    assert(pos >= 0 &&   pos < a->nb_bit);
+
+    /* which_array represent which array of a->tab_bit contains pos*/
+    which_array = a->taille_tab - pos/32 - 1;
+
+    /* index represent where is pos in a->tab_bit[which_array] */
+    index = pos - 32 * ( a->taille_tab - which_array - 1);
+
+    a->tab_bit[which_array] = (int) a->tab_bit[which_array] & ~(1 << index);
 }
