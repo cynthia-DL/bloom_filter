@@ -24,9 +24,10 @@ void free_bitarray(bitarray *a){
 void set_bitarray(bitarray *a, int pos) {
     int one = 1;
     int tab = pos / 32;
-    int bit = pos % 32;
+    int bit = pos % 32 + tab;
 
     a->tab_bit[a->taille_tab - 1 - tab] = a->tab_bit[a->taille_tab - 1 - tab] | (one << (bit - 1));
+    
 }
 
 void print_bitarray(bitarray *a) {
@@ -38,6 +39,8 @@ void print_bitarray(bitarray *a) {
         octet = a->tab_bit[i];
         printf(" ");
         for (j = 32; j >= 0; j--) {
+
+        
             if ((octet / (int) pow(2, j)) == 1) {
                 octet = octet - pow(2, j);
                 printf("1");
@@ -56,19 +59,18 @@ void print_bitarray(bitarray *a) {
  * @return 0 or 1 depending of the value of the byte pos
  */
 int get_bitarray(bitarray* a, int pos){
-    int which_array, index, res;
+    int tab;
+    int bit;
+    int res;
 
-    assert(a != NULL);
-    assert(pos >= 0 &&   pos < a->nb_bit);
+    /* tab represent which array of a->tab_bit contains pos*/
+    tab = a->taille_tab - pos/32 - 1;
 
-    /* which_array represent which array of a->tab_bit contains pos*/
-    which_array = a->taille_tab - pos/32 - 1;
-
-    /* index represent where is pos in a->tab_bit[which_array] */
-    index = pos - 32 * ( a->taille_tab - which_array - 1);
+    /* bit represent where is pos in a->tab_bit[which_array] */
+    bit = pos - 32 * ( a->taille_tab - tab - 1);
 
     /* res is the value at position pos in the bitarray*/
-    res =  (a->tab_bit[which_array] & (1 << index)) ? 1 : 0;
+    res =  (a->tab_bit[tab] & (1 << bit)) ? 1 : 0;
 
     return res;
 }
@@ -78,16 +80,14 @@ int get_bitarray(bitarray* a, int pos){
  * @param int pos
  */
 void reset_bitarray(bitarray *a, int pos){
-    int which_array, index;
+    int tab;
+    int bit;
 
-    assert(a != NULL);
-    assert(pos >= 0 &&   pos < a->nb_bit);
+    /* tab represent which array of a->tab_bit contains pos*/
+    tab = a->taille_tab - pos/32 - 1;
 
-    /* which_array represent which array of a->tab_bit contains pos*/
-    which_array = a->taille_tab - pos/32 - 1;
+    /* bit represent where is pos in a->tab_bit[which_array] */
+    bit = pos - 32 * ( a->taille_tab - tab - 1);
 
-    /* index represent where is pos in a->tab_bit[which_array] */
-    index = pos - 32 * ( a->taille_tab - which_array - 1);
-
-    a->tab_bit[which_array] = (int) a->tab_bit[which_array] & ~(1 << index);
+    a->tab_bit[tab] = (int) a->tab_bit[tab] & ~(1 << bit);
 }
