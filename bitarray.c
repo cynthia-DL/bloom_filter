@@ -22,7 +22,7 @@ bitarray *create_bitarray(int m){
 }
 
 /**
- * Free the memory associated with the bitarray a
+ * Free the memory allocated with the bitarray a
  * @param bitarray *a
  */
 void free_bitarray(bitarray *a){
@@ -35,12 +35,12 @@ void free_bitarray(bitarray *a){
  * @param int pos
  */
 void set_bitarray(bitarray *a, int pos) {
-    if(pos > a->nb_bit)
-        exit(EXIT_FAILURE);
-
     int one = 1;
-    int tab = pos / 32;
-    int bit = (pos % 32) + 1;
+    int tab = (pos + 1) / 32;
+    int bit = ((pos + 1) % 32) + 1;
+
+    if(pos >= a->nb_bit)
+        exit(EXIT_FAILURE);
 
     a->tab_bit[a->taille_tab - 1 - tab] = a->tab_bit[a->taille_tab - 1 - tab] | (one << (bit - 1));
     
@@ -82,6 +82,7 @@ int get_bitarray(bitarray* a, int pos){
     int tab;
     int bit;
     int res;
+    pos++;
 
     /* tab represent which array of a->tab_bit contains pos*/
     tab = a->taille_tab - pos/32 - 1;
@@ -102,6 +103,7 @@ int get_bitarray(bitarray* a, int pos){
 void reset_bitarray(bitarray *a, int pos){
     int tab;
     int bit;
+    pos++;
 
     /* tab represent which array of a->tab_bit contains pos*/
     tab = a->taille_tab - pos/32 - 1;
