@@ -51,25 +51,11 @@ void set_bitarray(bitarray *a, int pos) {
  * @param bitarray *a
  */
 void print_bitarray(bitarray *a) {
-    int taille = a->taille_tab;
-    int i, j;
-    int octet;
-    int reste = a->nb_bit % 32;
-
-    for (i = 0; i < taille; i++) {
-        octet = a->tab_bit[i];
-        for (j = 32; j > 0; j--) {
-            if ((octet / (int) pow(2, j)) == 1) {
-                octet = octet - pow(2, j);
-                if( (i != 0) || (j <= reste))
-                    printf("1");
-            }
-            else {
-                if( (i != 0) || (j <= reste))
-                    printf("0");
-            }
-        }
+    int i;
+    for (i = a->nb_bit; i >= 0;  i--){
+        printf("%d", get_bitarray(a, i));
     }
+    printf("\n");
 }
 
 /** 
