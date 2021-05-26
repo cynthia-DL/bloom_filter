@@ -25,4 +25,6 @@ void add_filter(filter *f, char *str);
 /* Check if the key str is in the filter, 0 means no, 1 means maybe */
 int is_member_filter(filter *f, char *str);
 
+/* Return the sum of evry numeric value of the ascii characters from str */
+int sum_str(char *str);
 #endif
