@@ -52,5 +52,6 @@ Mkfile.old
 dkms.conf
 
 bloom
+test
 
 .idea*
