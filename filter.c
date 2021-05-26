@@ -62,6 +62,8 @@ void add_filter(filter *f, char *str){
     /* filling hashes with the hash function */
     hash(f, str, hashes);
 
+    printf("%d %d %d\n", hashes[0],  hashes[1], hashes[2]);
+
     /* changing the bites according to the hashes array */
     for (i = 0; i < f->weight_height; i++){
         set_bitarray(f->bitarray, hashes[i]);
@@ -83,10 +85,13 @@ int is_member_filter(filter *f, char *str){
 
     hash(f, str, hashes);
 
+    printf("%d %d %d\n", hashes[0],  hashes[1], hashes[2]);
+
     for(i = 0; i < f->weight_height; i++){
         if(get_bitarray(f->bitarray, hashes[i]) == 0)
             return 0;
     }
+    free(hashes);
     return 1;
 }
 
