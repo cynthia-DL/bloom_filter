@@ -38,16 +38,15 @@ void free_filter(filter *f)
  */
 void hash(filter *f, char *str, unsigned hashes[])
 {
-    int i, value;
+   int i, j;
 
-    /* value is the numeric representation of str */
-    value = sum_str(str);
-
-    /* filling hashes with out hash function */
     for (i = 0; i < f->weight_height; i++)
     {
-        /* using the hash function given in the subject */
-        hashes[i] = (f->weight[i] * value) % f->bitarray->nb_bit;
+        hashes[i] = 0;
+        for (j = 0; str[j] != '\0'; j++)
+        {
+            hashes[i] = (f->weight[i] * hashes[i] + str[j]) % f->bitarray->nb_bit;
+        }
     }
 }
 
@@ -66,8 +65,6 @@ void add_filter(filter *f, char *str)
 
     /* filling hashes with the hash function */
     hash(f, str, hashes);
-
-    printf("%d %d %d\n", hashes[0], hashes[1], hashes[2]);
 
     /* changing the bites according to the hashes array */
     for (i = 0; i < f->weight_height; i++)
@@ -92,8 +89,6 @@ int is_member_filter(filter *f, char *str)
 
     hash(f, str, hashes);
 
-    printf("%d %d %d\n", hashes[0], hashes[1], hashes[2]);
-
     for (i = 0; i < f->weight_height; i++)
     {
         if (get_bitarray(f->bitarray, hashes[i]) == 0)
@@ -104,20 +99,4 @@ int is_member_filter(filter *f, char *str)
     }
     free(hashes);
     return 1;
-}
-
-/**
- * Return the sum of evry numeric value of the ascii characters from str
- * @param str char*
- * @return int the sum
- */
-int sum_str(char *str)
-{
-    int sum, i;
-
-    for (i = 0, sum = 0; str[i] != '\0'; i++)
-    {
-        sum += (int)str[i];
-    }
-    return sum;
 }
