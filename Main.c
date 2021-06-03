@@ -19,7 +19,7 @@ int main() {
     add_filter(f, "tomate");
     print_bitarray(f->bitarray);
     printf("\n");
-    if(is_member_filter(f, "tomate"))
+    if(is_member_filter(f, "prog"))
         printf("\nOK\n");
     else
         printf("\nNOP\n");

@@ -1,24 +1,18 @@
 CC=gcc
-CFLAGS=-Wall -ansi -pedantic
-LDFLAGS= -lm
-DEPS=filter.h bitarray.h
-OBJ=filter.o bitarray.o
+CFLAGS=-Wall -ansi -g
+LDFLAGS=-lm
+DEPS=bitarray.h filter.h
+OBJ=bitarray.o filter.o
 
 %.o: %.c $(DEPS)
-	@$(CC) -c -o $@ $< $(CFLAGS)
+	$(CC) -c -o $@ $< $(CFLAGS)
 
-bloom: Main.o $(OBJ)
-	@gcc -o $@ $^ $(LDFLAGS)
+test: test.o $(OBJ)
+	gcc -o $@ $^ $(LDFLAGS)
 
 .PHONY: clean
 clean:
-	rm -f $(OBJ) bloom Main.o
+	rm -f $(OBJ) test test.o
 
 execute:
-	@./bloom
-
-valgrind:
-	@valgrind ./bloom
-
-time :
-	@time ./bloom
+	@./test
