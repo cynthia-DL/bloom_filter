@@ -1,8 +1,8 @@
 CC=gcc
 CFLAGS=-Wall -ansi -pedantic
 LDFLAGS= -lm
-DEPS=filter.h bitarray.h
-OBJ=filter.o bitarray.o
+DEPS=filter.h bitarray.h hachage.h
+OBJ=filter.o bitarray.o hachage.o
 
 %.o: %.c $(DEPS)
 	@$(CC) -c -o $@ $< $(CFLAGS)
