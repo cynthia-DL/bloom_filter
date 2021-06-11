@@ -29,7 +29,7 @@ link *find_list(link* lst, char word[]) {
     return ptr;
 }
 
-link *insert_first_list(link *lst, char word[], int pos) {
+link *insert_first_list(link *lst, char word[]) {
     link *tmp = create_link(word);
     tmp->next = lst;
     return tmp;
@@ -37,6 +37,27 @@ link *insert_first_list(link *lst, char word[], int pos) {
 
 int equal(char* w1, char* w2) {
     return strcmp(w1, w2) == 0;
+}
+
+unsigned int hache(char *p){
+    unsigned int h=0,g;
+    for(;*p;p++){
+        h=(h<<4)+*p;
+        if((g = h&0xf0000000)) /*il y a des valeurs dans les 4 bits de poids fort*/
+        {
+            h=h^(g>>24);/*elles vont influencer l'octet de poids faible*/
+            h=h^g;/*on les supprime du haut de h*/
+        }
+    }
+    return h;
+}
+
+void add_table(table *tab, char word[]){
+    int index = hache(word);
+    link * tmp;
+
+    if(!(find_list(tab->bucket[index % tab->M], word)))
+        tab->bucket[index % tab->M] = insert_first_list(tab->bucket[index % tab->M], word);
 }
 
 void free_link(link *lnk) {

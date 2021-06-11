@@ -17,8 +17,10 @@ typedef struct _table {
 link *create_link(char word[]);
 table *create_table(int M);
 link *find_list(link* lst, char word[]);
-link *insert_first_list(link *lst, char word[], int pos);
+link *insert_first_list(link *lst, char word[]);
 int equal(char* w1, char* w2);
+unsigned int hache(char *p);
+void add_table(table *tab, char word[]);
 void free_link(link *lnk);
 void free_list(link *lst);
 void free_table(table *tab);
