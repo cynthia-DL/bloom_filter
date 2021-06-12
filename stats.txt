@@ -1,1 +1,2 @@
-file time_bloom_filter time_hashtable time_bts space_bloom_filter space_hashtable space_bts
+password_file reseach_file time_bloom_filter time_hashtable time_bts space_bloom_filter space_hashtable space_bts
+1000words.txt morewords.txt (1000, 10, 1000)0m8,988s (1000)0m0,284s 0m0,237s 63,264 117,272 68,064
