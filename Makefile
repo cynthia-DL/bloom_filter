@@ -18,7 +18,7 @@ execute:
 	@./bloom 1000words.txt morewords.txt
 
 valgrind:
-	@valgrind ./bloom
+	@valgrind ./bloom 1000words.txt morewords.txt
 
 time :
-	@time ./bloom
+	@time ./bloom 1000words.txt morewords.txt
