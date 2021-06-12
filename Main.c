@@ -83,7 +83,7 @@ int main(int argc, char* argv[]) {
 
     printf("\nMots testés : %f -> Mots ajoutés : %f\n",nbWordTested,nbWord);
     printf("Peut-être : %f ->  Oui : %f\n",maybe, find);
-    printf("Taux de faux positifs : %f", find / maybe);
+    printf("Taux de faux positifs : %f", ((maybe - find ) * 100)/ maybe);
 
     free_filter(f);
     free_table(tab);
