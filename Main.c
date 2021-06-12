@@ -80,12 +80,12 @@ int main(int argc, char* argv[]) {
             }
         }
     }
+    fclose(infile2);
 
-    printf("%f -> %f\n",nbWordTested,nbWord);
+    printf("\nMots testés : %f -> Mots ajoutés : %f\n",nbWordTested,nbWord);
     printf("Peut-être : %f ->  Oui : %f\n",maybe, find);
     printf("Taux de faux positifs : %f", find / maybe);
 
-    fclose(infile2);
     free_filter(f);
     free_table(tab);
 
