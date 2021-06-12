@@ -21,15 +21,27 @@ int main(int argc, char* argv[]) {
     FILE* infile2;
     FILE* infile;
 
-    if(argc > 1){
+    if(argc > 2){
         file = argv[1];
-        if(argc > 2)
-            file2 = argv[2];
-        else
-            file2 = "morewords.txt";
+        file2 = argv[2];
     }
-    else
-        file = "1000words.txt";
+    else{
+        fprintf(stderr, "Le programme requiert 2 fichiers en argument.\n");
+        exit(1);
+    }
+
+    infile2 = fopen(file2,"r");
+    infile = fopen(file,"r");
+
+    if(infile == NULL) {
+        fprintf(stderr, "File doesn't exist.\n");
+        exit(1);
+    }
+
+    if(infile2 == NULL) {
+        fprintf(stderr, "File2 doesn't exist.\n");
+        exit(1);
+    }
 
     while(taille < 1) {
         printf("Choisissez le nombre de bit dans le bitarray : ");
@@ -48,19 +60,6 @@ int main(int argc, char* argv[]) {
 
     f = create_filter(taille, nb_hach);
     tab = create_table(taille_hach);
-
-    infile2 = fopen(file2,"r");
-    infile = fopen(file,"r");
-
-    if(infile == NULL) {
-        fprintf(stderr, "File doesn't exist.\n");
-        exit(1);
-    }
-
-    if(infile2 == NULL) {
-        fprintf(stderr, "File2 doesn't exist.\n");
-        exit(1);
-    }
 
     srand(time(NULL));
 
