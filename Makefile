@@ -15,7 +15,7 @@ clean:
 	rm -f $(OBJ) bloom Main.o
 
 execute:
-	@./bloom
+	@./bloom 1000words.txt morewords.txt
 
 valgrind:
 	@valgrind ./bloom

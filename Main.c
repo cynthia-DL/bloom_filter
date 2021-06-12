@@ -1,21 +1,56 @@
 #include "hachage.h"
 
-int main() {
-    int m = 32, k = 3, M = 50;
-    filter *f = create_filter(m, k);
-    table *tab = create_table(M);
-    char * file = "1000words.txt";
-    char * file2 = "morewords.txt";
+#include <stdio.h>
+
+int main(int argc, char* argv[]) {
+
+    filter *f;
+    table *tab;
+    char * file;
+    char * file2;
 
     double maybe = 0;
     double isin = 0;
     double nbWordTested = 0;
-
-    char word[50];
+    int taille = 0;
+    int nb_hach = 0;
+    int taille_hach = 0;
+    char word[1000];
     double nbWord = 0;
 
-    FILE* infile2 = fopen(file2,"r");
-    FILE* infile = fopen(file,"r");
+    FILE* infile2;
+    FILE* infile;
+
+    if(argc > 1){
+        file = argv[1];
+        if(argc > 2)
+            file2 = argv[2];
+        else
+            file2 = "morewords.txt";
+    }
+    else
+        file = "1000words.txt";
+
+    while(taille < 1) {
+        printf("Choisissez le nombre de bit dans le bitarray : ");
+        scanf(" %d", &taille);
+    }
+
+    while(nb_hach < 1) {
+        printf("Choisissez le nombre de fonctions de hachage : ");
+        scanf(" %d", &nb_hach);
+    }
+
+    while(taille_hach < 1){
+        printf("Choisissez la taille de la table de hachage : ");
+        scanf(" %d", &taille_hach);
+    }
+
+    f = create_filter(taille, nb_hach);
+    tab = create_table(taille_hach);
+
+    infile2 = fopen(file2,"r");
+    infile = fopen(file,"r");
 
     if(file == NULL) {
         fprintf(stderr, "File doesn't exist.\n");
@@ -23,7 +58,7 @@ int main() {
     }
 
     if(file2 == NULL) {
-        fprintf(stderr, "File doesn't exist.\n");
+        fprintf(stderr, "File2 doesn't exist.\n");
         exit(1);
     }
 
@@ -40,7 +75,7 @@ int main() {
         nbWordTested++;
         if(is_member_filter(f, word)) {
             maybe++;
-            if(find_list(tab->bucket[hache(word) % M], word) != NULL) {
+            if(find_list(tab->bucket[hache(word) % taille_hach], word) != NULL) {
                 isin++;
             }
         }
