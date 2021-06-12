@@ -54,7 +54,6 @@ unsigned int hache(char *p){
 
 void add_table(table *tab, char word[]){
     int index = hache(word);
-    link * tmp;
 
     if(!(find_list(tab->bucket[index % tab->M], word)))
         tab->bucket[index % tab->M] = insert_first_list(tab->bucket[index % tab->M], word);
